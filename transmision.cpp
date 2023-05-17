@@ -15,9 +15,6 @@
 //   6. Comparar con resultados teóricos.                             |
 //   7. Calcular los valores esperados de observables (posición,      |
 //      momento, energía cinética, energía total) con errores.        |
-//   8. Estudiar la dependencia de K con el número n de barreras y    |
-//      cuantificar este comportamiento haciendo un ajuste con una    |
-//      función de prueba.                                            |
 //                                                                    |
 //---------------------------------------------------------------------
 
@@ -115,7 +112,7 @@ int main()
     fich_posicion.open("expval_posicion.txt");
     fich_momento.open("expval_momento.txt");
     fich_cinetica.open("expval_cinetica.txt");
-    fich_energia.open("expval_energia");
+    fich_energia.open("expval_energia.txt");
 
     lambda = 0.9;
     ciclos = 50;                // Restringido a 1,...,N/4
