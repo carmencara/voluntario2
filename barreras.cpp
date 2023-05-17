@@ -1,4 +1,4 @@
-/---------------------------------------------------------------------
+//---------------------------------------------------------------------
 //                                                                    |
 //          ALGORITMO PARA RESOLVER LA ECUACIÓN DE SCHRÖDINGER        |
 //                   PROBLEMA VOLUNTARIO DEL TEMA 3                   |
@@ -47,7 +47,7 @@ int main()
                                 // cuando se detecta (detectar=1) el bucle para
 
     // Defino el número de barreras y el ancho del pozo
-    barreras = 3;
+    barreras = 1;
     Q = N + 2*N*(barreras-1)/5;
 
     double lambda;              // Cte de proporcionalidad para la energía del fotón incidente
@@ -94,7 +94,7 @@ int main()
     fich_potencial.open("b_potencial.txt");
     fich_K.open("b_coeficiente_transmision.txt");
 
-    lambda = 0.9;
+    lambda = 0.5;
     ciclos = Q/4;                // Restringido a 1,...,N/4
     k0_tilde = 2*PI*ciclos/Q;
     s_tilde = 1/(4*k0_tilde*k0_tilde);
@@ -167,9 +167,9 @@ int main()
         phi[0] = (0.0, 0.0);
         phi[Q] = (0.0, 0.0);
         norma_phi = 0.0;
-        for(j=1; j<N; j++)
+        for(j=1; j<Q; j++)
         {
-            phi[Q] = CalculaPhi(j, k0_tilde, Q);
+            phi[j] = CalculaPhi(j, k0_tilde, Q);
             norma_phi = norma_phi + CalculaNorma2(phi[j]);
         }
         norma_phi = sqrt(norma_phi);
@@ -197,7 +197,7 @@ int main()
             for(j=1;j<Q;j++) xi[j] = alpha[j-1]*xi[j-1]+beta[j-1];
 
             // CÁLCULO DE PHI: phi[j,n+1]=xi[j,n]-phi[j,n]
-            norma_phi = 0;
+            //norma_phi = 0;
             for(k=1;k<Q;k++) phi[k] = xi[k]-phi[k];
 
             // BUSCO EL MÁXIMO LOCAL DE PD
@@ -205,7 +205,8 @@ int main()
             {
                 // Probabilidad de detectar la partícula a la derecha
                 PR = 0.0;
-                for(j=2*(barreras+1)*N/5;j<Q;j++) PR = PR + CalculaNorma2(phi[j]);
+                for(j=(N/5)*2*(barreras+1);j<Q;j++) PR = PR + CalculaNorma2(phi[j]);
+
                 PR_media = PR_media + PR;
 
                 // Genero un número real aleatorio entre 0 y 1 para medir a la derecha
