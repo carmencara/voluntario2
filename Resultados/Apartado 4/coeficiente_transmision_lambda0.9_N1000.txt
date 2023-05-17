@@ -1,0 +1,5 @@
+Valor de K:	0.401
+K teórico:	0.404916
+Error relativo	-0.967157 %
+P_D promedio:	0.390536
+Error:	0.0309967

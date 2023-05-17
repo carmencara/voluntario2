@@ -1,0 +1,5 @@
+Valor de K:	0.217
+K teórico:	nan
+Error relativo	nan %
+P_D promedio:	0.228369
+Error:	0.02607
