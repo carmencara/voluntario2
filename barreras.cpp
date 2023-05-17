@@ -46,10 +46,14 @@ int main()
     int detectar;               // Ejecuta el bucle cuando no se detecta la partícula (detectar=0),
                                 // cuando se detecta (detectar=1) el bucle para
 
+    // Defino el número de barreras y el ancho del pozo
+    barreras = 3;
+    Q = N + 2*N*(barreras-1)/5;
+
     double lambda;              // Cte de proporcionalidad para la energía del fotón incidente
     double s_tilde;             // s/h^2=1/4k0_tilde^2
     double k0_tilde;            // k0*h, con k0*N*h=2*PI*ciclos
-    double V[N+1];              // Potencial, es lambda*k0_tilde^2 si j\in[2N/5,3N/5]
+    double V[Q+1];              // Potencial, es lambda*k0_tilde^2 si j\in[2N/5,3N/5]
     double Aplus, Aminus;       // Para calcular alpha, Aplus=1, Aminus=1
     double norma_phi;           // Norma de la función de onda
     double norma_txt;
@@ -65,13 +69,13 @@ int main()
     double aux;                 // Variable auxiliar
     double h;                   // Paso entre puntos = 2*k0_tilde (para integración numérica)
 
-    complex<double> phi[N+1];   // Función de onda
-    complex<double> xi[N+1];    // phi[j,n+1]=xi[j,n]-phi[j,n]
-    complex<double> alpha[N];   // xi[j+1]=alpha[j]*xi[j]+beta[j]
-    complex<double> beta[N];    // xi[j+1]=alpha[j]*xi[j]+beta[j]
-    complex<double> gamma[N];   // gamma[j]=1/(A0[j]+Aplus*alpha[j])
-    complex<double> b[N];       // b[j]=2i*phi[j]/s_tilde
-    complex<double> A0[N];      // Para calcular alpha, A0[j]=-2+2i/s_tilde-V[j]
+    complex<double> phi[Q+1];   // Función de onda
+    complex<double> xi[Q+1];    // phi[j,n+1]=xi[j,n]-phi[j,n]
+    complex<double> alpha[Q];   // xi[j+1]=alpha[j]*xi[j]+beta[j]
+    complex<double> beta[Q];    // xi[j+1]=alpha[j]*xi[j]+beta[j]
+    complex<double> gamma[Q];   // gamma[j]=1/(A0[j]+Aplus*alpha[j])
+    complex<double> b[Q];       // b[j]=2i*phi[j]/s_tilde
+    complex<double> A0[Q];      // Para calcular alpha, A0[j]=-2+2i/s_tilde-V[j]
 
     ofstream fich_potencial;    // Fichero para guardar la forma del potencial
     ofstream fich_K;            // Fichero para guardar todo lo relativo al coef. de transmisión
@@ -91,12 +95,10 @@ int main()
     fich_K.open("b_coeficiente_transmision.txt");
 
     lambda = 0.9;
-    barreras = 3;
-    Q = N + 2*N*(barreras-1)/5;
     ciclos = Q/4;                // Restringido a 1,...,N/4
     k0_tilde = 2*PI*ciclos/Q;
     s_tilde = 1/(4*k0_tilde*k0_tilde);
-    nD = round(2000*(barreras/2));
+    nD = round(2000*(barreras/2.0));
     h = 2*k0_tilde;
 
     // Inicialización del potencial
@@ -107,26 +109,26 @@ int main()
         fich_potencial << j << " " << V[j] << endl; 
     }
     // Zona II) Barreras
-    for(k=0;k<=2*barreras;k++)
+    for(j=0;j<2*barreras+1;j++)
     { 
-        for(j=0;j<=N/5;j++) // La zona de las barreras sigue midiendo N/5
+        for(k=0;k<=N/5;k++) // La zona de las barreras sigue midiendo N/5
         {
-            if(k%2!=0) // Los tramos impares son las zonas altas de las barreras
+            if(j%2!=0) // Los tramos impares son las zonas altas de las barreras
             {
-                i = j + (k+1)*N/5;
+                i = k + (j+1)*N*0.2;
                 V[i] = lambda*k0_tilde*k0_tilde;
                 fich_potencial << i << " " << V[i] << endl;
             }
             else // Los tramos pares son las zonas bajas de las barreras
             {
-                i = j + (k+1)*N/5;
+                i = k + (j+1)*N*0.2;
                 V[i] = 0.0; 
                 fich_potencial << i << " " << V[i] << endl;   
             }
         }
     }
     // Zona III) Derecha de las barreras
-    for(j=(2*barreras+1);j<=Q;j++)
+    for(j=(2*barreras+1)*N/5;j<=Q;j++)
     {
         V[j] = 0.0; 
         fich_potencial << j << " " << V[j] << endl; 

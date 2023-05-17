@@ -151,7 +151,7 @@ int main()
     // -------------------------- ALGORITMO ---------------------------
 
     beta[N] = 0.0;
-    iteraciones = 1000;
+    iteraciones = 1; // (1000 para los apartados 1-6, 1 para el apartado 7)
     mT = 0.0; // Inicializo el número de veces que se detecta a la partícula a la derecha
     PR_media = 0.0; // Inicializo la probabilidad media
 
@@ -291,7 +291,7 @@ int main()
 
             // 4. Guardar los valores esperados en ficheros en función del tiempo
             fich_posicion << t << " " << real(expval_x) << " " << 0 << " " << real(error_x) << endl;
-            fich_momento << t << "" << imag(expval_p) << " " << 0 << " " << real(error_p) << endl;
+            fich_momento << t << " " << imag(expval_p) << " " << 0 << " " << real(error_p) << endl;
             fich_cinetica << t << " " << sqrt(CalculaNorma2(expval_T)) << " " << 0 << " " << sqrt(CalculaNorma2((error_T))) << endl;
             fich_energia << t << " "<<sqrt(CalculaNorma2(expval_E)) << " " << 0 << " " << sqrt(CalculaNorma2(error_E)) << endl;
         }
