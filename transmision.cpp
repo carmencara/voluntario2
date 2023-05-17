@@ -113,7 +113,7 @@ int main()
     fich_potencial.open("potencial.txt");
     fich_K.open("coeficiente_transmision.txt");
     fich_posicion.open("expval_posicion.txt");
-    fich_momento.open("expval_posicion.txt");
+    fich_momento.open("expval_momento.txt");
     fich_cinetica.open("expval_cinetica.txt");
     fich_energia.open("expval_energia");
 
