@@ -47,7 +47,7 @@ int main()
                                 // cuando se detecta (detectar=1) el bucle para
 
     // Defino el número de barreras y el ancho del pozo
-    barreras = 1;
+    barreras = 10;
     Q = N + 2*N*(barreras-1)/5;
 
     double lambda;              // Cte de proporcionalidad para la energía del fotón incidente
