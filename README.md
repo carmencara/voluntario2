@@ -22,6 +22,7 @@ del ajuste.
 Se han realizado dos programas en C++:
 - transmision.cpp (para los apartados 1-7)
 - barreras.cpp (para el apartado 8)
+
 En ambos se ha necesitado la librería GSL para la generación de números aleatorios (gsl_rng.h).
 
 Los ficheros con los datos que se extraen de las simulaciones se encuentran en la carpeta "Resultados", que está organizada en las
