@@ -1,0 +1,3 @@
+Valor de K:	0.198
+P_D promedio:	0.203799
+Error:	0.0252029
